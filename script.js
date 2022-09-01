@@ -6,6 +6,7 @@ function createColors() {
     section.appendChild(div);
     if (section.firstElementChild.style.backgroundColor !== 'black') {
       section.firstElementChild.style.backgroundColor = 'black';
+      section.firstElementChild.classList = 'color selected';
     } else if (index === 1) {
       section.children[index].style.backgroundColor = 'red';
     } else if (index === 2) {
