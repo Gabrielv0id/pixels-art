@@ -12,7 +12,6 @@ function createColors() {
       section.children[index].style.backgroundColor = 'purple';
     } else {
       section.children[index].style.backgroundColor = 'blue';
-
     }
   }
 }
@@ -28,13 +27,25 @@ function createButton() {
 
 createButton();
 
+const div = document.querySelectorAll('.color');
+
 function randomColors() {
-  const div = document.querySelectorAll('.color');
+  const colorPallet = [];
   for (let index = 1; index <= 3; index += 1) {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
     div[index].style.backgroundColor = `#${randomColor}`;
+    colorPallet.push(div[index].style.backgroundColor);
   }
+  localStorage.setItem('colorPalette', JSON.stringify(colorPallet));
 }
-
 const button = document.getElementById('button-random-color');
 button.addEventListener('click', randomColors);
+
+const text = localStorage.getItem('colorPalette');
+const saveColor = JSON.parse(text);
+
+if (text !== null) {
+  for (let index = 1; index <= 3; index += 1) {
+    div[index].style.backgroundColor = saveColor[index - 1];
+  }
+}
