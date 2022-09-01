@@ -49,3 +49,26 @@ if (text !== null) {
     div[index].style.backgroundColor = saveColor[index - 1];
   }
 }
+
+const board = document.createElement('section');
+board.id = 'pixel-board';
+document.body.appendChild(board);
+
+// for (let index = 0; index < 5; index += 1) {
+//   const pixel = document.createElement('div');
+//   pixel.className = 'pixel';
+//   board.appendChild(pixel);
+// }
+
+console.log(document.getElementsByClassName('line'));
+
+function pixelGrade() {
+  for (let index = 0; index < 5; index += 1) {
+    for (let pixels = 0; pixels < 5; pixels += 1) {
+      const pixel = document.createElement('div');
+      pixel.className = 'pixel';
+      board.appendChild(pixel);
+    }
+  }
+}
+pixelGrade();
