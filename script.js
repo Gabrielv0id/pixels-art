@@ -27,7 +27,15 @@ function createButton() {
   corpo.appendChild(button);
 }
 
+function clearButton() {
+  const button = document.createElement('button');
+  button.id = 'clear-board';
+  button.innerText = 'Limpar';
+  document.body.appendChild(button);
+}
+
 createButton();
+clearButton();
 
 function randomColors() {
   const colorPallet = [];
@@ -38,8 +46,8 @@ function randomColors() {
   }
   localStorage.setItem('colorPalette', JSON.stringify(colorPallet));
 }
-const button = document.getElementById('button-random-color');
-button.addEventListener('click', randomColors);
+const buttonColor = document.getElementById('button-random-color');
+buttonColor.addEventListener('click', randomColors);
 
 const text = localStorage.getItem('colorPalette');
 const saveColor = JSON.parse(text);
@@ -92,3 +100,12 @@ function selectColor(event) {
     alvoClicado.classList = 'color selected';
   }
 }
+
+function clearBoard() {
+  const pixelBoard = document.getElementById('pixel-board');
+  pixelBoard.innerHTML = '';
+  pixelGrade();
+}
+
+const Limpar = document.getElementById('clear-board');
+Limpar.addEventListener('click', clearBoard);
