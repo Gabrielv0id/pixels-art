@@ -68,8 +68,6 @@ document.body.appendChild(board);
 //   board.appendChild(pixel);
 // }
 
-console.log(document.getElementsByClassName('line'));
-
 function pixelGrade() {
   for (let index = 0; index < 5; index += 1) {
     for (let pixels = 0; pixels < 5; pixels += 1) {
