@@ -26,7 +26,8 @@ h1 {
   width: 40px;
   display: inline-block;
   margin-bottom: -4px;
-  background-color: white;
+
+  /* background-color: white; */
 }
 
 #button-random-color {

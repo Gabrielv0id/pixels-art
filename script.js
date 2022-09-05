@@ -1,5 +1,14 @@
 const section = document.getElementById('color-palette');
 
+function selectColor(event) {
+  const alvoClicado = event.target;
+  const selected = document.querySelector('.selected');
+  if (alvoClicado.classList.length !== 2) {
+    selected.classList = 'color';
+    alvoClicado.classList = 'color selected';
+  }
+}
+
 function createDivs() {
   for (let index = 0; index < 4; index += 1) {
     const div = document.createElement('div');
@@ -68,19 +77,9 @@ document.body.appendChild(board);
 //   board.appendChild(pixel);
 // }
 
-function pixelGrade() {
-  for (let index = 0; index < 5; index += 1) {
-    for (let pixels = 0; pixels < 5; pixels += 1) {
-      const pixel = document.createElement('div');
-      pixel.className = 'pixel';
-      board.appendChild(pixel);
-      pixel.addEventListener('click', pixelColor);
-    }
-  }
-}
-pixelGrade();
-
 section.firstElementChild.classList = 'color selected';
+const colorBoardSaved = [];
+let square = document.querySelectorAll('.pixel');
 
 function pixelColor(event) {
   const alvoClicado = event.target;
@@ -88,16 +87,25 @@ function pixelColor(event) {
   if (alvoClicado.style.backgroundColor !== selected.style.backgroundColor) {
     alvoClicado.style.backgroundColor = selected.style.backgroundColor;
   }
+  colorBoardSaved.push(alvoClicado.style.backgroundColor);
+  localStorage.setItem('pixelBoard', JSON.stringify(colorBoardSaved));
 }
 
-function selectColor(event) {
-  const alvoClicado = event.target;
-  const selected = document.querySelector('.selected');
-  if (alvoClicado.classList.length !== 2) {
-    selected.classList = 'color';
-    alvoClicado.classList = 'color selected';
+function pixelGrade() {
+  for (let index = 0; index < 5; index += 1) {
+    for (let pixels = 0; pixels < 5; pixels += 1) {
+      const pixel = document.createElement('div');
+      pixel.className = 'pixel';
+      pixel.style.backgroundColor = 'white';
+      board.appendChild(pixel);
+      pixel.addEventListener('click', pixelColor);
+    }
   }
 }
+pixelGrade();
+
+const text2 = localStorage.getItem('pixelBoard');
+const boardSave = JSON.parse(text2);
 
 function clearBoard() {
   const pixelBoard = document.getElementById('pixel-board');
