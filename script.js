@@ -78,16 +78,18 @@ document.body.appendChild(board);
 // }
 
 section.firstElementChild.classList = 'color selected';
-const colorBoardSaved = [];
-let square = document.querySelectorAll('.pixel');
 
 function pixelColor(event) {
+  const colorBoardSaved = [];
+  const square = document.querySelectorAll('.pixel');
   const alvoClicado = event.target;
   const selected = document.querySelector('.selected');
   if (alvoClicado.style.backgroundColor !== selected.style.backgroundColor) {
     alvoClicado.style.backgroundColor = selected.style.backgroundColor;
   }
-  colorBoardSaved.push(alvoClicado.style.backgroundColor);
+  for (let index = 0; index < square.length; index += 1) {
+    colorBoardSaved.push(square[index].style.backgroundColor);
+  }
   localStorage.setItem('pixelBoard', JSON.stringify(colorBoardSaved));
 }
 
@@ -104,14 +106,26 @@ function pixelGrade() {
 }
 pixelGrade();
 
-const text2 = localStorage.getItem('pixelBoard');
-const boardSave = JSON.parse(text2);
-
 function clearBoard() {
   const pixelBoard = document.getElementById('pixel-board');
   pixelBoard.innerHTML = '';
+  localStorage.clear('pixelBoard');
   pixelGrade();
 }
 
 const Limpar = document.getElementById('clear-board');
 Limpar.addEventListener('click', clearBoard);
+
+const pixelSquare = document.querySelectorAll('.pixel');
+
+function savedBoard() {
+  if (localStorage.getItem('pixelBoard')) {
+    const text2 = localStorage.getItem('pixelBoard');
+    const boardSaved = JSON.parse(text2);
+    for (let index = 0; index < pixelSquare.length; index += 1) {
+      pixelSquare[index].style.backgroundColor = boardSaved[index];
+    }
+  }
+}
+
+savedBoard();
