@@ -45,6 +45,12 @@ function clearButton() {
 
 createButton();
 clearButton();
+const botao = document.querySelector('#generate-board');
+function randomizeBoard () {
+  const input = document.querySelector('')
+
+}
+botao.addEventListener('click',randomizeBoard);
 
 function randomColors() {
   const colorPallet = [];
