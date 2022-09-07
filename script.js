@@ -45,12 +45,6 @@ function clearButton() {
 
 createButton();
 clearButton();
-const botao = document.querySelector('#generate-board');
-function randomizeBoard () {
-  const input = document.querySelector('')
-
-}
-botao.addEventListener('click',randomizeBoard);
 
 function randomColors() {
   const colorPallet = [];
@@ -99,25 +93,43 @@ function pixelColor(event) {
   localStorage.setItem('pixelBoard', JSON.stringify(colorBoardSaved));
 }
 
-function pixelGrade() {
-  for (let index = 0; index < 5; index += 1) {
-    for (let pixels = 0; pixels < 5; pixels += 1) {
-      const pixel = document.createElement('div');
+function pixelGrade(number) {
+  for (let index = 0; index < number; index += 1) {
+    const x = document.createElement('TR');
+    board.appendChild(x);
+    for (let pixels = 0; pixels < number; pixels += 1) {
+      const pixel = document.createElement('TD');
       pixel.className = 'pixel';
       pixel.style.backgroundColor = 'white';
-      board.appendChild(pixel);
+      x.appendChild(pixel);
       pixel.addEventListener('click', pixelColor);
     }
   }
 }
-pixelGrade();
 
 function clearBoard() {
-  const pixelBoard = document.getElementById('pixel-board');
-  pixelBoard.innerHTML = '';
+  const pixelBoard = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixelBoard.length; index += 1) {
+    pixelBoard[index].style.backgroundColor = 'white';
+  }
   localStorage.clear('pixelBoard');
-  pixelGrade();
 }
+
+const input = document.querySelector('#board-size');
+function alerta() {
+  if (input.value < 5 || input.value > 50) {
+    window.alert('Board inválido!');
+  } else {
+    board.innerHTML = '';
+    alert('Criando board!');
+    const num = document.querySelector('#board-size').value;
+    pixelGrade(num);
+  }
+}
+
+pixelGrade(5);
+const botao = document.querySelector('#generate-board');
+botao.addEventListener('click', alerta);
 
 const Limpar = document.getElementById('clear-board');
 Limpar.addEventListener('click', clearBoard);

@@ -15,9 +15,9 @@ h1 {
 }
 
 #pixel-board {
-  width: 210px;
-  height: 210px;
-  margin-left: 840px;
+  width: fit-content;
+  margin: auto;
+  justify-content: center;
 }
 
 .pixel {
